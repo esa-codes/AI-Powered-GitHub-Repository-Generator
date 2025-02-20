@@ -1,0 +1,13 @@
+flask
+gunicorn
+python-dotenv
+google-generativeai
+sqlalchemy
+python-dateutil
+pygithub
+markdown
+PyGithub
+GitPython
+flask_sqlalchemy
+link-preview
+requests

@@ -1,0 +1,22 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  aigithub:
+    build: .
+    container_name: aigithub
+    ports:
+      - "9346:5000"
+    environment:
+      -  GOOGLE_API_KEY=your-google-api-key
+      -  GITHUB_TOKEN=your-github-token
+      -  GITHUB_USERNAME=your-github-username
+    volumes:
+      - /mnt/raid/aigithub:/app/data
+    networks:
+      - snet
+    restart: always
+
+networks:
+  snet:
+    external: true

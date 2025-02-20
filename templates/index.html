@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Code Generator</title>
+  <link rel="icon" type="image/x-icon" href="/static/img/favicon.ico">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="min-h-screen">
+  <!-- Navigation -->
+  <nav class="bg-indigo-600 text-white shadow-lg sticky top-0 z-50">
+    <div class="container mx-auto px-6 py-4">
+      <div class="flex items-center justify-between">
+        <a href="/" class="text-2xl font-bold">CodeGen</a>
+        <div class="flex items-center space-x-6">
+          <div class="relative">
+            <input type="search" id="repo-search" placeholder="Search repositories..." class="search-bar px-4 py-2 rounded-lg text-gray-800 w-64 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          </div>
+          <select id="sort-select" class="search-bar px-4 py-2 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            <option value="recent">Most Recent</option>
+            <option value="stars">Most Stars</option>
+            <option value="name">Name</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container mx-auto px-6 py-8">
+    <!-- Generator Sidebar -->
+    <section class="generator-section bg-white rounded-xl shadow-lg p-8">
+      <form id="generate-app-form" method="POST" action="{{ url_for('generate_code') }}" class="space-y-6">
+        <div>
+          <label for="prompt" class="block text-sm font-medium text-gray-700 mb-2">
+            Generate your Code!
+          </label>
+          <textarea id="prompt" name="prompt" rows="6" class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Example: Create a Flask web application for a todo list with user authentication..." required></textarea>
+        </div>
+        <button type="submit" id="generateAppButton" class="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition duration-150 pulse-button">
+          Generate Code
+        </button>
+        <label for="prompt" class="block text-sm font-medium text-gray-700 mb-2">
+          Do not share personal information
+        </label>
+      </form>
+    </section>
+
+    <!-- Repository Grid -->
+    <section class="mb-12">
+      <div class="repository-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Dynamic content will be inserted here by JavaScript -->
+
+        <!-- No results message template -->
+        <div id="no-results" class="col-span-full py-8 text-center text-gray-500 hidden">
+          No repositories found matching your search.
+        </div>
+      </div>
+    </section>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden flex items-center justify-center">
+      <div class="bg-white p-8 rounded-xl shadow-xl text-center">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mx-auto"></div>
+        <p class="mt-4 text-gray-700">Generating your Code...</p>
+      </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden flex items-center justify-center">
+      <div class="bg-white p-8 rounded-xl shadow-xl text-center">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">Code Generated Successfully!</h2>
+        <p class="text-gray-700 mb-6">Your repository has been created on GitHub.</p>
+        <p id="repo-link-container" class="mb-6">
+          <a id="repo-link" href="#" target="_blank" class="text-indigo-600 hover:underline break-all">
+            <!-- Repository link will be inserted here -->
+          </a>
+        </p>
+        <button id="close-modal" class="bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition duration-150">
+          Close
+        </button>
+      </div>
+    </div>
+
+    <!-- Error Modal -->
+    <div id="error-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden flex items-center justify-center">
+      <div class="bg-white p-8 rounded-xl shadow-xl text-center">
+        <!-- Error content will be injected here by JavaScript -->
+      </div>
+    </div>
+
+    <!-- Info Modal -->
+    <div id="infoModal" class="modal hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
+      <div class="modal-content bg-white p-8 rounded-xl shadow-xl relative">
+        <span class="close-button absolute top-2 right-2 cursor-pointer text-2xl">×</span>
+        <h2 class="text-2xl font-bold mb-4">Hello!</h2>
+        <p class="mb-4">
+          You are about to use an AI code generator that leverages the power of the Google Gemini API to create applications. The generated app will be automatically inserted into a GitHub repository under the MIT license.
+        </p>
+        <p class="mb-4"><strong>Important Information:</strong></p>
+        <ul class="list-disc list-inside mb-4">
+          <li class="mb-2">
+            <p>
+              Your request and the responses will be processed on Google's servers using the Gemini API. The data may be used to improve the service, as specified in our Privacy Policy and the Google Gemini API terms of service (for free plans).
+            </p>
+          </li>
+          <li>
+            <p>
+              If you use the "Grounding with Google Search" feature, your data may be stored for 30 days for debugging purposes. Please review the documentation for detailed information.
+            </p>
+          </li>
+          <li>
+            <p>
+              This website do not use cookies and do not collect your personal information.
+            </p>
+          </li>
+
+        </ul>
+        <p class="mb-4">
+          We encourage you to carefully review our <a href="/privacy" class="text-indigo-600 hover:underline">Privacy Policy</a> for more details about our operations and data protection practices.
+        </p>
+        <div class="modal-actions flex items-center space-x-4">
+          <input type="checkbox" id="acceptPrivacy">
+          <label for="acceptPrivacy">I accept the Privacy Policy terms</label>
+          <button id="modalAgreeBtn" class="analyze-button bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" disabled>Generate Code</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-gray-800 text-gray-400 text-center py-4">
+    <p>© <span id="copyright-year"></span> Esavibes</p>
+    <div class="footer-links mt-2">
+      <a href="https://esavibes.com/" target="_blank" rel="noopener noreferrer" class="mx-2 hover:text-white">Home</a>
+      <a href="https://esavibes.com/blog/" target="_blank" rel="noopener noreferrer" class="mx-2 hover:text-white">Blog</a>
+      <a href="https://esavibes.com/portfolio/" target="_blank" rel="noopener noreferrer" class="mx-2 hover:text-white">Portfolio</a>
+      <a href="https://esavibes.com/contatti/" target="_blank" rel="noopener noreferrer" class="mx-2 hover:text-white">Contacts</a>
+      <a href="/privacy" class="mx-2 hover:text-white">Privacy Policy</a>
+      <a href="/doc" class="mx-2 hover:text-white">GitHub</a>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const currentYear = new Date().getFullYear();
+      document.getElementById('copyright-year').textContent = currentYear;
+    });
+  </script>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/modal.js') }}"></script>
+</body>
+</html>

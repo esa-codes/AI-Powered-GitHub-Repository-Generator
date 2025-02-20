@@ -1,0 +1,681 @@
+/* ==========================================================================
+   CUSTOM CSS FOR AI APP GENERATOR (TAILWIND-COMPATIBLE)
+   This stylesheet is written to complement Tailwind CSS. It uses custom
+   selectors and does not override Tailwind’s utility classes.
+   ========================================================================== */
+
+/* Global Settings */
+body {
+  font-family: 'Archivo', sans-serif;
+  background-color: #121821;
+  color: #CBD5E0;
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+/* Main Layout: Sidebar on the Left & Content on the Right */
+main {
+  display: flex;
+  gap: 2rem;
+  flex: 1; /* Allows main to expand and push the footer down */
+  padding-top: 2rem;
+}
+
+/* --------------------------------------------------------------------------
+   Sidebar - "Create New Application" Section
+   -------------------------------------------------------------------------- */
+.generator-section {
+  width: 350px;
+  background-color: #1E293B; /* Custom dark background */
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  position: sticky;
+  top: 100px;
+  height: fit-content;
+}
+
+.generator-section h1 {
+  color: #F0F4F8;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.generator-section label {
+  display: block;
+  font-size: 0.85rem;
+  color: #D1D5DB;
+  margin-bottom: 0.5rem;
+}
+
+.generator-section textarea {
+  width: 100%;
+  background-color: #2D3748;
+  border: 1px solid #4A5568;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  font-size: 0.9rem;
+  color: #CBD5E0;
+  min-height: 150px;
+  resize: vertical;
+}
+
+.generator-section textarea:focus {
+  outline: none;
+  border-color: #6B7280;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+.generator-section button {
+  width: 100%;
+  background-color: #4F46E5;
+  color: #F0F4F8;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+  margin-top: 1rem;
+}
+
+.generator-section button:hover {
+  background-color: #6366F1;
+  transform: translateY(-1px);
+}
+
+section.generator-section {
+  width: 30%; /* Optionally add this line to make the section full width as well, if needed */
+}
+
+section.container {
+  width: 100%; /* Optionally add this line to make the section full width as well, if needed */
+}
+
+section.mb-12 {
+  width: 100%; /* Optionally add this line to make the section full width as well, if needed */
+}
+
+/* --------------------------------------------------------------------------
+   Repository Grid and Cards
+   -------------------------------------------------------------------------- */
+
+.repository-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.25rem;
+  width: 100%;
+}
+
+.repo-card {
+  background-color: #1E293B;
+  border-radius: 0.375rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.repo-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.repo-card .p-6 {
+  padding: 1rem;
+}
+
+.repo-card h3 {
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: #F0F4F8;
+  margin-bottom: 0.5rem;
+}
+
+.repo-card .date {
+  font-size: 0.75rem;
+  color: #94A3B8;
+  margin-bottom: 0.50rem;
+  font-weight: 400;
+}
+
+.repo-card .card-image {
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: none;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    object-fit: contain; !important
+}
+
+.repo-card .view-button {
+  background-color: rgb(79, 70, 229); !important
+  color: #000000; !important
+  padding: 0.375rem 0.75rem; !important
+  border-radius: 0.25rem; !important
+  text-decoration: none; !important
+  font-size: 0.50rem; !important
+  font-weight: 400; !important
+  letter-spacing: 0.01em; !important
+  transition: all 0.15s ease; !important
+}
+
+.repo-card .view-button:focus {
+  /* Remove any Tailwind ring/outline styles */
+  --tw-ring-inset: initial !important;
+  --tw-ring-offset-width: 0 !important;
+  --tw-ring-offset-color: transparent !important;
+  --tw-ring-color: transparent !important;
+  --tw-ring-offset-shadow: none !important;
+  --tw-ring-shadow: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.repo-card .view-button:hover {
+  background-color: #3E4C67;
+}
+
+/* Repository Card Footer Styles */
+.repo-card footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background-color: rgba(0, 0, 0, 0.03);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.repo-card footer span {
+    font-size: 0.75rem;
+    color: #94A3B8;
+    font-weight: 400;
+}
+
+.repo-card footer a {
+    font-size: 0.75rem;
+    color: #F0F4F8;
+    text-decoration: none;
+    background-color: #3B82F6;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.375rem;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.repo-card footer a:hover {
+    background-color: #2563EB;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.repo-card footer a::after {
+    content: "→";
+    font-size: 0.875rem;
+    transition: transform 0.2s ease;
+}
+
+.repo-card footer a:hover::after {
+    transform: translateX(2px);
+}
+
+/* --------------------------------------------------------------------------
+   Star Rating (Tailwind handles icons; custom hover state added)
+   -------------------------------------------------------------------------- */
+.rating-container {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.star-rating {
+  font-size: 1rem;
+  color: #718096;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.star-rating:hover,
+.star-rating.starred {
+  color: #FBBF24;
+}
+
+/* --------------------------------------------------------------------------
+   Loading Overlay & Success Modal
+   -------------------------------------------------------------------------- */
+#loading-overlay,
+#success-modal {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(17, 24, 39, 0.9);
+  backdrop-filter: blur(8px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+#success-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+#success-modal .bg-white {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 0.75rem;
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#success-modal h2 {
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+#success-modal p {
+    color: #4b5563;
+    margin-bottom: 1rem;
+}
+
+#success-modal a {
+    color: #3b82f6;
+    text-decoration: none;
+}
+
+#success-modal a:hover {
+    text-decoration: underline;
+}
+
+#success-modal button {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#success-modal button:hover {
+    background-color: #2563eb;
+}
+
+.modal-content {
+  background-color: #1E293B;
+  padding: 2rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+#loading-overlay .animate-spin {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #4F46E5;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#loading-overlay p,
+#success-modal p {
+  margin-top: 1rem;
+  color: #CBD5E0;
+}
+
+
+
+/* --------------------------------------------------------------------------
+   Link preview - Enhanced Styling
+   -------------------------------------------------------------------------- */
+
+.link-preview {
+  padding: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.preview-image {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 0.25rem;
+  margin-bottom: 0.75rem;
+  background-color: #2D3748;
+}
+
+.preview-title {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: #E2E8F0;
+  margin-bottom: 0.375rem;
+  line-height: 1.3;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.preview-description {
+  font-size: 0.75rem;
+  color: #94A3B8;
+  line-height: 1.4;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.preview-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.preview-meta span {
+  font-size: 0.6875rem;
+  color: #94A3B8;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.preview-meta i {
+  font-size: 0.75rem;
+}
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+footer {
+  background-color: #1a1a1f;
+  color: #A0AEC0;
+  text-align: center;
+  padding: 1.5rem 1rem;
+}
+
+footer p {
+  margin-bottom: 0.5rem;
+}
+
+footer .footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+footer .footer-links a {
+  color: #718096;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+footer .footer-links a:hover {
+  color: #CBD5E0;
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   Modal Styles for AI App Generator
+   -------------------------------------------------------------------------- */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  inset: 0;
+  background-color: rgba(17, 24, 39, 0.9); /* Semi-transparent dark overlay */
+  backdrop-filter: blur(8px);
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal.active {
+  display: flex; /* Show modal when active */
+}
+
+.modal .modal-content {
+  background-color: #1E293B;
+  padding: 2rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  max-width: 500px;
+  width: 90%;
+  font-size: 0.875rem; /* Small and elegant text */
+  color: #F0F4F8;
+  position: relative;
+}
+
+.modal .modal-content h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.modal .modal-content p {
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.modal .modal-content ul {
+  list-style: disc;
+  margin: 0.5rem 0 1rem 1.5rem;
+  text-align: left;
+}
+
+.modal .modal-content a {
+  color: #64b5f6;
+  text-decoration: none;
+}
+
+.modal .modal-content a:hover {
+  text-decoration: underline;
+}
+
+.modal .modal-content .modal-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.modal .modal-content .close-button {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #CBD5E0;
+  transition: color 0.2s ease;
+}
+
+.modal .modal-content .close-button:hover {
+  color: #FBBF24;
+}
+
+/* Error Modal Styles (same as Success Modal) */
+#error-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+#error-modal .bg-white {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 0.75rem;
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#error-modal h2 {
+  color: #1a1a1a;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+#error-modal p {
+  color: #4b5563;
+  margin-bottom: 1rem;
+}
+
+#error-modal a {
+  color: #3b82f6;
+  text-decoration: none;
+}
+
+#error-modal a:hover {
+  text-decoration: underline;
+}
+
+#error-modal button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+#error-modal button:hover {
+  background-color: #2563eb;
+}
+
+
+#loading-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(17, 24, 39, 0.9);
+  backdrop-filter: blur(8px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999; /* Increased z-index to ensure visibility */
+}
+
+#loading-overlay .animate-spin {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #4F46E5;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  animation: spin 1s linear infinite;
+}
+
+#loading-overlay .bg-white {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+#loading-overlay p {
+  margin-top: 1rem;
+  color: #4B5563;
+  font-size: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* --------------------------------------------------------------------------
+   Animations
+   -------------------------------------------------------------------------- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Design
+   -------------------------------------------------------------------------- */
+   @media (max-width: 1024px) {
+     main {
+       flex-direction: column;
+     }
+     .generator-section {
+       width: 100%;
+       position: static;
+       top: auto;
+       margin-bottom: 2rem;
+     }
+   }
+
+@media (max-width: 768px) {
+  nav .container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  nav .search-controls {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  nav .search-bar,
+  nav select {
+    width: 100%;
+  }
+
+  .repository-grid {
+    grid-template-columns: 1fr;
+  }
+}
