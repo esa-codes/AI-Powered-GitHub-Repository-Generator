@@ -11,6 +11,4 @@ services:
       -  GOOGLE_API_KEY=your-google-api-key
       -  GITHUB_TOKEN=your-github-token
       -  GITHUB_USERNAME=your-github-username
-    volumes:
-      - /mnt/raid/aigithub:/app/data
     restart: always
