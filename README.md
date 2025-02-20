@@ -46,7 +46,7 @@ Returns the privacy policy page.
 To deploy this application, use any container-based platform such as AWS, DigitalOcean, or others that support Docker.
 
 ## License
-This project is licensed under the MIT License.
+This project is licensed under the GNU GENERAL PUBLIC LICENSE Version 3.
 
 ## Contributing
 Feel free to submit pull requests or open issues for suggestions and improvements.
