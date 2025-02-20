@@ -13,10 +13,4 @@ services:
       -  GITHUB_USERNAME=your-github-username
     volumes:
       - /mnt/raid/aigithub:/app/data
-    networks:
-      - snet
     restart: always
-
-networks:
-  snet:
-    external: true
