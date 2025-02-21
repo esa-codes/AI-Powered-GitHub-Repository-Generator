@@ -7,16 +7,48 @@ from generate_files import FileGenerator
 from github_handler import GitHubHandler
 import shutil
 import requests
+import mistralai
+from mistralai import Mistral
 
 load_dotenv()
 
-# Configure Gemini
-genai.configure(api_key=os.getenv('GOOGLE_API_KEY'))
-
 app = Flask(__name__)
 
-# Gemini setup
-generative_model = genai.GenerativeModel('gemini-pro')
+# Function to get the valid API key
+def get_api_key():
+    api_keys = {
+        "GOOGLE_API_KEY": "gemini",
+        "OPENAI_API_KEY": "openai",
+        "MISTRAL_API_KEY": "mistral"
+    }
+
+    for env_var, api_name in api_keys.items():
+        api_key = os.getenv(env_var)
+        if api_key:
+            print(f"Using {api_name} API with key from {env_var}")
+            return api_key, api_name
+
+    raise ValueError("No valid API key found in environment variables")
+
+# Configure the selected API
+api_key, api_name = get_api_key()
+
+if api_name == "gemini":
+    import google.generativeai as genai
+    genai.configure(api_key=api_key)
+    model = 'gemini-pro'  # Define model for the gemini API
+    generative_model = genai.GenerativeModel(model)
+elif api_name == "openai":
+    import openai
+    openai.api_key = api_key
+    model = "gpt-3.5-turbo"  # o "gpt-4" se hai accesso
+    generative_model = openai.ChatCompletion
+elif api_name == "mistral":
+    from mistralai import Mistral
+    model = "mistral-medium"  # o "mistral-small" o "mistral-large-latest"
+    generative_model = Mistral(api_key=api_key)
+else:
+    raise ValueError("Unsupported API")
 
 REPOS_PER_PAGE = 50
 
@@ -165,8 +197,12 @@ def generate_code():
         if not user_prompt:
             return jsonify({'error': 'No prompt provided'}), 400
 
-        # Initialize the file generator
-        file_generator = FileGenerator(generative_model)
+        # Initialize the file generator with all necessary parameters
+        file_generator = FileGenerator(
+            generative_model=generative_model,
+            api_name=api_name,
+            model_name=model
+        )
         output_dir = None  # Initialize output_dir here
 
         try:
@@ -211,3 +247,4 @@ def privacy():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=False)
+
