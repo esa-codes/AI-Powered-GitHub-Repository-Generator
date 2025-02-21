@@ -1,7 +1,7 @@
 # AI-Powered GitHub Repository Generator
 
 ## Description
-This Flask-based web application enables users to generate AI-assisted project structures and automatically create GitHub repositories. It leverages Google's Gemini AI model to generate project files based on user prompts and integrates with the GitHub API for repository creation and management.
+This Flask-based web application enables users to generate AI-assisted project structures and automatically create GitHub repositories. It leverages Google's Gemini AI, OpenAi or Mistral model to generate project files based on user prompts and integrates with the GitHub API for repository creation and management.
 
 ## Features
 - **AI-powered project generation**: Uses Google's Gemini AI model to create structured project files.
@@ -16,11 +16,13 @@ This Flask-based web application enables users to generate AI-assisted project s
 - Docker & Docker Compose installed
 - GitHub account with a personal access token
 - Google API key for Gemini AI
+- OpenAi API key
+- Mistral API key
 
 ### Setup
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-username/your-repo.git
+   git clone https://github.com/esa-codes/AI-Powered-GitHub-Repository-Generator.git
    cd your-repo
    ```
 2. Build and run the application using Docker:
