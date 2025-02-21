@@ -8,7 +8,9 @@ services:
     ports:
       - "9346:5000"
     environment:
-      -  GOOGLE_API_KEY=your-google-api-key
+      -  GOOGLE_API_KEY=your-google-api-key #Or Leave it blank !use one API only
+      -  OPENAI_API_KEY=your-openai-api-key #Or Leave it blank !use one API only
+      -  MISTRAL_API_KEY= #Or leave it blank !use one API only
       -  GITHUB_TOKEN=your-github-token
       -  GITHUB_USERNAME=your-github-username
     restart: always
